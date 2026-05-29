@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas - Módulo 3</title>
+    <style>
+        /* ==========================================
+           ESTILOS BASE (Centrado y fondo de oficina)
+           ========================================== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8; /* Gris azulado muy claro y relajante */
+            color: #333333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* ==========================================
+           CONTENEDOR PRINCIPAL (Estilo tarjeta limpia)
+           ========================================== */
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra muy sutil */
+            width: 100%;
+            max-width: 450px;
+        }
+
+        /* Encabezados minimalistas */
+        h1 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-top: 20px;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 8px;
+        }
+
+        /* ==========================================
+           FORMULARIOS Y BOTONES
+           ========================================== */
+        form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Efecto de foco sutil */
+        input[type="text"]:focus {
+            border-color: #0078d4; /* Azul corporativo */
+        }
+
+        button {
+            background-color: #0078d4;
+            color: #ffffff;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005a9e;
+        }
+
+        /* Botón de sincronización secundario */
+        #syncApiBtn {
+            background-color: #f3f2f1;
+            color: #323130;
+            border: 1px solid #8a8886;
+            width: 100%;
+            margin-top: 5px;
+            font-weight: normal;
+        }
+
+        #syncApiBtn:hover {
+            background-color: #e1dfdd;
+        }
+
+        /* ==========================================
+           LISTA DE TAREAS
+           ========================================== */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #faf9f8;
+            border: 1px solid #edebe9;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            color: #444444;
+        }
+
+        /* Botón de eliminar con estilo de alerta apagada */
+        li button {
+            background-color: transparent;
+            color: #d13438; 
+            border: 1px solid #d13438;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+        }
+
+        li button:hover {
+            background-color: #d13438;
+            color: #ffffff;
+        }
+
+        /* ==========================================
+           MENSAJES DINÁMICOS
+           ========================================== */
+        #messageArea {
+            min-height: 20px;
+            margin: 0 0 15px 0;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        
+        .success { color: #107c10; } /* Verde tipo Excel */
+        .error { color: #d13438; }
+
+        hr {
+            border: none;
+            margin: 25px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor para simular la "tarjeta" flotante -->
+    <div class="container">
+        <h1>Mis Tareas</h1>
+        
+        <!-- Formulario para captura de datos -->
+        <form id="taskForm">
+            <input type="text" id="taskInput" placeholder="Escribe una nueva tarea..." autocomplete="off">
+            <button type="submit">Agregar</button>
+        </form>
+        
+        <!-- Área para mensajes dinámicos -->
+        <p id="messageArea"></p> 
+
+        <!-- Botón para consumo de API -->
+        <button id="syncApiBtn">Sincronizar con API (GET/POST)</button>
+
+        <hr>
+
+        <!-- Lista donde se renderiza el DOM -->
+        <h2>Lista de Tareas</h2>
+        <ul id="taskList"></ul>
+    </div>
+
+    <!-- Conexión al script de JS -->
+    <script src="app.js"></script>
+</body>
+</html>
